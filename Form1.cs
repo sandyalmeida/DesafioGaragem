@@ -86,7 +86,7 @@ namespace WinFormsAppDesafioGaragem
 
             veiculo.gerarDataHora("saida");
 
-            veiculo.realizarCobranca(5);
+            veiculo.realizarCobranca(5.00);
 
             MessageBox.Show("Valor cobrado: "+veiculo.ValorCobrado);
 
@@ -96,12 +96,15 @@ namespace WinFormsAppDesafioGaragem
 
             listaSaida.Add(veiculo);
 
+            listaEntrada.Remove(veiculo);
 
             lstSaida.Items.Add(veiculo.Placa 
                 + " - " + veiculo.TempoPermanecia
                 + " minuto(s) - R$ " + veiculo.ValorCobrado);
 
             Persistencia.gravarNoArquivoSaida(listaSaida);
+
+            Persistencia.gravarNoArquivoEntrada(listaEntrada);
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)

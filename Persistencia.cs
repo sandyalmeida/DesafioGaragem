@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,8 @@ namespace WinFormsAppDesafioGaragem
         /// <param name="lista">lista de veículos</param>
         public static void gravarNoArquivoEntrada(List<Veiculo> lista)
         {
-            StreamWriter escritor = new StreamWriter("veiculosEntrada.dat");
+            criarArquivos();
+            StreamWriter escritor = new StreamWriter("../../../Arquivos/veiculosEntrada.dat");
 
             foreach (Veiculo i in lista)
             {
@@ -30,7 +32,8 @@ namespace WinFormsAppDesafioGaragem
         /// <param name="lista">lsita de veículos</param>
         public static void gravarNoArquivoSaida(List<Veiculo> lista)
         {
-            StreamWriter escritor = new StreamWriter("veiculosSaida.dat");
+            criarArquivos();
+            StreamWriter escritor = new StreamWriter("../../../Arquivos/veiculosSaida.dat");
 
             foreach (Veiculo i in lista)
             {                
@@ -46,7 +49,8 @@ namespace WinFormsAppDesafioGaragem
         /// <param name="lista">lista de veículos</param>
         public static void lerArquivoEntrada(List<Veiculo> lista)
         {
-            StreamReader leitor = new StreamReader("veiculosEntrada.dat");
+            criarArquivos();
+            StreamReader leitor = new StreamReader("../../../Arquivos/veiculosEntrada.dat");
             string linha;
             string[] vetorDados;
 
@@ -65,7 +69,8 @@ namespace WinFormsAppDesafioGaragem
         /// <param name="lista">lista veículos</param>
         public static void lerArquivoSaida(List<Veiculo> lista)
         {
-            StreamReader leitor = new StreamReader("veiculosSaida.dat");
+            criarArquivos();
+            StreamReader leitor = new StreamReader("../../../Arquivos/veiculosSaida.dat");
             string linha;
             string[] vetorDados;
             string aux = "";
@@ -79,6 +84,15 @@ namespace WinFormsAppDesafioGaragem
                     aux, int.Parse(vetorDados[1]), double.Parse(vetorDados[2])));
             }
             leitor.Close();
+        }
+
+        public static void criarArquivos()
+        {
+            //criar arquivo de entrada
+            using (StreamWriter w = File.AppendText("../../../Arquivos/veiculosEntrada.dat")) { }
+
+            //criar arquivo de saída
+            using (StreamWriter w = File.AppendText("../../../Arquivos/veiculosSaida.dat")) { }
         }
     }
 }
